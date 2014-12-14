@@ -9,6 +9,18 @@
   // instance of given context is created / destroyed, or you want to be able to
   // issue command requests from this context), you may simply omit the
   // `hadnlers` parameter for good when invoking msg.init()
+    function log() { console.log.apply(console, arguments); }
+    function callback(res) { log('<<<<< callback invoked, return value = ' + JSON.stringify(res)); }
   var handlers = require('./modules/handlers').create('dt');
-  require('./modules/msg').init('dt', handlers);
+    /*var types = require('ast-types');
+    var acorn = require('acorn');*/
+  var msg = require('./modules/msg').init('dt');
+    msg.bg('echo', "DEV TOOLS WORKS", callback);
+    /* global chrome */
+    chrome.devtools.panels.create(
+        'Instrument Code',
+        null, // No icon path
+        '../html/PreprocessorPanel.html',
+        null // no callback needed
+    );
 })();
