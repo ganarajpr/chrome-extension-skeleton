@@ -28,13 +28,18 @@ function extractPreprocessedFiles(onExtracted) {
 
 function reloadWithPreprocessor(injectedScript) {
     msg.bg('echo', "RELOADING WITH PREPROCESSOR INjECTED SCRIPT \n"+injectedScript,function(){});
-  var options = {
-    ignoreCache: true,
-    userAgent: undefined,
-    injectedScript: '(' + injectedScript  + ')()',
-    preprocessingScript: '(' + preprocessor + ')'
-  };
-  chrome.devtools.inspectedWindow.reload(options);
+
+    msg.bg('getPreprocessor',function(preprocessorScript){
+        msg.bg('echo',"preprocessing with script "+preprocessorScript,function(){});
+        var options = {
+            ignoreCache: true,
+            userAgent: undefined,
+            injectedScript: '(' + injectedScript  + ')()',
+            preprocessingScript: '(' + preprocessorScript + ')'
+        };
+        chrome.devtools.inspectedWindow.reload(options);
+    });
+
 }
 
 function demoPreprocessor() {

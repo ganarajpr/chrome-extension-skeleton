@@ -82,7 +82,7 @@ module.exports = function (grunt) {
                 dest: '',
                 options: {
                     indent: '\t',
-                    wrapper: ['function preprocess($source, $url, $listenerName) {', '\treturn $source;\n}'],
+                    wrapper: ['function ($source, $url, $listenerName) {', '\treturn $source;\n}'],
                     separator : '\n'
                 }
             }
